@@ -7,7 +7,6 @@ index = {"get_max_pages": "00_pubmed.ipynb",
          "write_db": "00_pubmed.ipynb",
          "extract_page": "00_pubmed.ipynb",
          "extract_and_write": "00_pubmed.ipynb",
-         "process_many": "00_pubmed.ipynb",
          "crawl_list": "00_pubmed.ipynb",
          "crawl_pubmed": "00_pubmed.ipynb"}
 
