@@ -8,9 +8,17 @@ index = {"get_max_pages": "00_pubmed.ipynb",
          "extract_page": "00_pubmed.ipynb",
          "extract_and_write": "00_pubmed.ipynb",
          "crawl_list": "00_pubmed.ipynb",
-         "crawl_pubmed": "00_pubmed.ipynb"}
+         "crawl_pubmed": "00_pubmed.ipynb",
+         "default_args": "03_airflow.ipynb",
+         "dag": "03_airflow.ipynb",
+         "t1": "03_airflow.ipynb",
+         "t2": "03_airflow.ipynb",
+         "t1.doc_md": "03_airflow.ipynb",
+         "templated_command": "03_airflow.ipynb",
+         "t3": "03_airflow.ipynb"}
 
-modules = ["pubmed.py"]
+modules = ["pubmed.py",
+           "airflow.py"]
 
 doc_url = "https://insai.github.io/research_crawler/"
 

@@ -2,6 +2,8 @@
   "research_crawler": {
     "Overview": "/",
     "pubmed": "/pubmed",
-    "scholar": "/scholar"
+    "scholar": "/scholar",
+    "analysis": "/analysis",
+    "airflow": "/airflow"
   }
 }

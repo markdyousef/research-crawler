@@ -12,7 +12,7 @@ import re
 import random
 from pymongo import MongoClient
 import pandas as pd
-from multiprocessing import Pool
+from threading import Thread
 from tqdm.notebook import tqdm
 
 # Cell
@@ -58,27 +58,39 @@ def extract_page(url):
                 keywords=kwords, citation=cit, url=url)
 
 # Cell
-def extract_and_write(url):
+def extract_and_write(url, kw):
     data = extract_page(url)
+    data['keyword'] = kw
     return write_db(data)
 
 # Cell
-def crawl_list(page):
+def crawl_list(page, kw):
     bs = BeautifulSoup(page, 'html.parser')
     divs = bs.find_all('div', {'class': 'rslt'})
-    with Pool(len(divs)) as p:
-        for d in tqdm(divs):
-            # get paper's link
-            u = URL + d.find('a').get('href')
-            p.apply_async(extract_and_write, args=(u,))
+
+    def crawl(d):
+        u = URL + d.find('a').get('href')
+        extract_and_write(u, kw)
+
+    for d in divs:
+        t = Thread(target=crawl, args=(d,))
+        t.start()
+
 
 # Cell
-def crawl_pubmed(keywords):
-    url = f'{URL}/pubmed/?term={search_keywords}'
-    browser.get(url)
-    max_pages = get_max_pages(keywords)
-    for _ in tqdm(range(max_pages)):
-        crawl_list(browser.page_source)
-        browser.implicitly_wait(1)
-        # Click next buttion to navigate to the next page
-        browser.find_element_by_xpath('//*[@title="Next page of results"]').click()
+def crawl_pubmed(keywords, start_page=0):
+    for kw in tqdm(keywords):
+        url = f'{URL}/pubmed/?term={kw}'
+        browser.get(url)
+        max_pages = get_max_pages(kw)
+
+        if start_page > 0:
+            # if not starting from first page
+            for _ in tqdm(range(start_page)):
+                browser.find_element_by_xpath('//*[@title="Next page of results"]').click()
+
+        for _ in tqdm(range(start_page, max_pages-1)):
+            crawl_list(browser.page_source, kw)
+            browser.implicitly_wait(1)
+            # Click next buttion to navigate to the next page
+            browser.find_element_by_xpath('//*[@title="Next page of results"]').click()

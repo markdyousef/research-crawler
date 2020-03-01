@@ -154,7 +154,7 @@ summary: "API details."
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Create MongoDB container from <a href="https://hub.docker.com/_/mongo">image</a> and expose to <code>localhost:32768</code></p>
+<p>Create MongoDB container from <a href="https://hub.docker.com/_/mongo">image</a> and expose to <code>localhost:27017</code></p>
 
 </div>
 </div>
@@ -164,20 +164,7 @@ summary: "API details."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># docker run --name research-mongo -d mongo:latest</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">MONGO_HOST</span> <span class="o">=</span> <span class="s1">&#39;mongodb://localhost:32768&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">MONGO_HOST</span> <span class="o">=</span> <span class="s1">&#39;mongodb://localhost:27017&#39;</span>
 </pre></div>
 
     </div>
@@ -246,7 +233,12 @@ summary: "API details."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">search_keywords</span> <span class="o">=</span> <span class="s1">&#39;electroencephalogram spectroscopy&#39;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">search_keywords</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;electroencephalogram&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;near infrared spectroscopy&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;transcranial electrical stimulation&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;transcranial magnetic stimulation&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;cognitive assessment&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;magnetic resonance&#39;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -259,7 +251,7 @@ summary: "API details."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">max_pages</span> <span class="o">=</span> <span class="n">get_max_pages</span><span class="p">(</span><span class="n">search_keywords</span><span class="p">);</span> <span class="n">max_pages</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">[</span><span class="n">get_max_pages</span><span class="p">(</span><span class="n">kw</span><span class="p">)</span> <span class="k">for</span> <span class="n">kw</span> <span class="ow">in</span> <span class="n">search_keywords</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -274,24 +266,11 @@ summary: "API details."
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>197</pre>
+<pre>[8133, 1146, 340, 861, 2951, 38015]</pre>
 </div>
 
 </div>
 
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># browser.page_source</span>
-</pre></div>
-
-    </div>
 </div>
 </div>
 
@@ -436,7 +415,7 @@ summary: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="extract_and_write" class="doc_header"><code>extract_and_write</code><a href="https://github.com/insai/research_crawler/tree/master/research_crawler/pubmed.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>extract_and_write</code>(<strong><code>url</code></strong>)</p>
+<h4 id="extract_and_write" class="doc_header"><code>extract_and_write</code><a href="https://github.com/insai/research_crawler/tree/master/research_crawler/pubmed.py#L61" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>extract_and_write</code>(<strong><code>url</code></strong>, <strong><code>kw</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -471,7 +450,7 @@ summary: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="crawl_list" class="doc_header"><code>crawl_list</code><a href="https://github.com/insai/research_crawler/tree/master/research_crawler/pubmed.py#L66" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crawl_list</code>(<strong><code>page</code></strong>)</p>
+<h4 id="crawl_list" class="doc_header"><code>crawl_list</code><a href="https://github.com/insai/research_crawler/tree/master/research_crawler/pubmed.py#L67" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crawl_list</code>(<strong><code>page</code></strong>, <strong><code>kw</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -494,7 +473,7 @@ summary: "API details."
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="crawl_pubmed" class="doc_header"><code>crawl_pubmed</code><a href="https://github.com/insai/research_crawler/tree/master/research_crawler/pubmed.py#L76" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crawl_pubmed</code>(<strong><code>keywords</code></strong>)</p>
+<h4 id="crawl_pubmed" class="doc_header"><code>crawl_pubmed</code><a href="https://github.com/insai/research_crawler/tree/master/research_crawler/pubmed.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>crawl_pubmed</code>(<strong><code>keywords</code></strong>, <strong><code>start_page</code></strong>=<em><code>0</code></em>)</p>
 </blockquote>
 
 </div>
@@ -510,7 +489,7 @@ summary: "API details."
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crawl_pubmed</span><span class="p">(</span><span class="n">search_keywords</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">get_max_pages</span><span class="p">(</span><span class="n">search_keywords</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -522,94 +501,819 @@ summary: "API details."
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="output_text output_subarea output_execute_result">
+<pre>38015</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">keywords</span> <span class="o">=</span> <span class="n">search_keywords</span><span class="p">[</span><span class="mi">5</span><span class="p">:];</span> <span class="n">keywords</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;magnetic resonance&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># start_page = 162_594 // 20; start_page</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">crawl_pubmed</span><span class="p">(</span><span class="n">keywords</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Exception in thread Thread-8:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+Exception in thread Thread-6:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+
+Exception in thread Thread-5:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-7:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-9:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-102:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-101:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-103:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-399:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-1439:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-2149:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-2148:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-2150:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-2389:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-2554:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-4273:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-4253:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-4393:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-4392:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-4394:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-6762:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+Exception in thread Thread-6763:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+
+Exception in thread Thread-6747:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-6867:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-7295:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-7297:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+Exception in thread Thread-7293:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+
+Exception in thread Thread-7296:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-7294:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-7359:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-10701:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-11073:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-11074:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-11894:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-12651:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-13028:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-13027:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-13828:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-15151:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16103:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 11, in extract_page
+    cit = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;cit&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16118:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16122:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16126:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+Exception in thread Thread-16130:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+
+Exception in thread Thread-16136:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16132:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16154:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16160:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16153:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16165:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+Exception in thread Thread-16171:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+
+Exception in thread Thread-16178:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
+
+Exception in thread Thread-16175:
+Traceback (most recent call last):
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 917, in _bootstrap_inner
+    self.run()
+  File &#34;/Users/markyousef/anaconda3/lib/python3.7/threading.py&#34;, line 865, in run
+    self._target(*self._args, **self._kwargs)
+  File &#34;&lt;ipython-input-21-a8b7c000dc57&gt;&#34;, line 8, in crawl
+    extract_and_write(u, kw)
+  File &#34;&lt;ipython-input-20-9e0ff25acdd7&gt;&#34;, line 3, in extract_and_write
+    data = extract_page(url)
+  File &#34;&lt;ipython-input-19-fb2f64b408a5&gt;&#34;, line 8, in extract_page
+    authors = bs.find(&#39;div&#39;, {&#39;class&#39;: &#39;auths&#39;}).get_text()
+AttributeError: &#39;NoneType&#39; object has no attribute &#39;get_text&#39;
 
 </pre>
 </div>
@@ -620,121 +1324,46 @@ summary: "API details."
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-27-5e00702b94f1&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>crawl_pubmed<span class="ansi-blue-fg">(</span>search_keywords<span class="ansi-blue-fg">)</span>
+<span class="ansi-red-fg">NoSuchElementException</span>                    Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-26-05b43c56e235&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>crawl_pubmed<span class="ansi-blue-fg">(</span>keywords<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">&lt;ipython-input-26-470179c1bb97&gt;</span> in <span class="ansi-cyan-fg">crawl_pubmed</span><span class="ansi-blue-fg">(keywords)</span>
-<span class="ansi-green-intense-fg ansi-bold">      8</span>         browser<span class="ansi-blue-fg">.</span>implicitly_wait<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      9</span>         <span class="ansi-red-fg"># Click next buttion to navigate to the next page</span>
-<span class="ansi-green-fg">---&gt; 10</span><span class="ansi-red-fg">         </span>browser<span class="ansi-blue-fg">.</span>find_element_by_xpath<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;//*[@title=&#34;Next page of results&#34;]&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>click<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">&lt;ipython-input-22-53aa28300743&gt;</span> in <span class="ansi-cyan-fg">crawl_pubmed</span><span class="ansi-blue-fg">(keywords, start_page)</span>
+<span class="ansi-green-intense-fg ansi-bold">     15</span>             browser<span class="ansi-blue-fg">.</span>implicitly_wait<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     16</span>             <span class="ansi-red-fg"># Click next buttion to navigate to the next page</span>
+<span class="ansi-green-fg">---&gt; 17</span><span class="ansi-red-fg">             </span>browser<span class="ansi-blue-fg">.</span>find_element_by_xpath<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;//*[@title=&#34;Next page of results&#34;]&#39;</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>click<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/webelement.py</span> in <span class="ansi-cyan-fg">click</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">     78</span>     <span class="ansi-green-fg">def</span> click<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     79</span>         <span class="ansi-blue-fg">&#34;&#34;&#34;Clicks the element.&#34;&#34;&#34;</span>
-<span class="ansi-green-fg">---&gt; 80</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>_execute<span class="ansi-blue-fg">(</span>Command<span class="ansi-blue-fg">.</span>CLICK_ELEMENT<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     81</span> 
-<span class="ansi-green-intense-fg ansi-bold">     82</span>     <span class="ansi-green-fg">def</span> submit<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/webdriver.py</span> in <span class="ansi-cyan-fg">find_element_by_xpath</span><span class="ansi-blue-fg">(self, xpath)</span>
+<span class="ansi-green-intense-fg ansi-bold">    392</span>             element <span class="ansi-blue-fg">=</span> driver<span class="ansi-blue-fg">.</span>find_element_by_xpath<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;//div/td[1]&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    393</span>         &#34;&#34;&#34;
+<span class="ansi-green-fg">--&gt; 394</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>find_element<span class="ansi-blue-fg">(</span>by<span class="ansi-blue-fg">=</span>By<span class="ansi-blue-fg">.</span>XPATH<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">=</span>xpath<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    395</span> 
+<span class="ansi-green-intense-fg ansi-bold">    396</span>     <span class="ansi-green-fg">def</span> find_elements_by_xpath<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> xpath<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/webelement.py</span> in <span class="ansi-cyan-fg">_execute</span><span class="ansi-blue-fg">(self, command, params)</span>
-<span class="ansi-green-intense-fg ansi-bold">    631</span>             params <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">{</span><span class="ansi-blue-fg">}</span>
-<span class="ansi-green-intense-fg ansi-bold">    632</span>         params<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;id&#39;</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_id
-<span class="ansi-green-fg">--&gt; 633</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_parent<span class="ansi-blue-fg">.</span>execute<span class="ansi-blue-fg">(</span>command<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    634</span> 
-<span class="ansi-green-intense-fg ansi-bold">    635</span>     <span class="ansi-green-fg">def</span> find_element<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> by<span class="ansi-blue-fg">=</span>By<span class="ansi-blue-fg">.</span>ID<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/webdriver.py</span> in <span class="ansi-cyan-fg">find_element</span><span class="ansi-blue-fg">(self, by, value)</span>
+<span class="ansi-green-intense-fg ansi-bold">    976</span>         return self.execute(Command.FIND_ELEMENT, {
+<span class="ansi-green-intense-fg ansi-bold">    977</span>             <span class="ansi-blue-fg">&#39;using&#39;</span><span class="ansi-blue-fg">:</span> by<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 978</span><span class="ansi-red-fg">             &#39;value&#39;: value})[&#39;value&#39;]
+</span><span class="ansi-green-intense-fg ansi-bold">    979</span> 
+<span class="ansi-green-intense-fg ansi-bold">    980</span>     <span class="ansi-green-fg">def</span> find_elements<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> by<span class="ansi-blue-fg">=</span>By<span class="ansi-blue-fg">.</span>ID<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
 <span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/webdriver.py</span> in <span class="ansi-cyan-fg">execute</span><span class="ansi-blue-fg">(self, driver_command, params)</span>
-<span class="ansi-green-intense-fg ansi-bold">    317</span> 
-<span class="ansi-green-intense-fg ansi-bold">    318</span>         params <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_wrap_value<span class="ansi-blue-fg">(</span>params<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 319</span><span class="ansi-red-fg">         </span>response <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>command_executor<span class="ansi-blue-fg">.</span>execute<span class="ansi-blue-fg">(</span>driver_command<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    319</span>         response <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>command_executor<span class="ansi-blue-fg">.</span>execute<span class="ansi-blue-fg">(</span>driver_command<span class="ansi-blue-fg">,</span> params<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">    320</span>         <span class="ansi-green-fg">if</span> response<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    321</span>             self<span class="ansi-blue-fg">.</span>error_handler<span class="ansi-blue-fg">.</span>check_response<span class="ansi-blue-fg">(</span>response<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 321</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>error_handler<span class="ansi-blue-fg">.</span>check_response<span class="ansi-blue-fg">(</span>response<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    322</span>             response[&#39;value&#39;] = self._unwrap_value(
+<span class="ansi-green-intense-fg ansi-bold">    323</span>                 response.get(&#39;value&#39;, None))
 
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/remote_connection.py</span> in <span class="ansi-cyan-fg">execute</span><span class="ansi-blue-fg">(self, command, params)</span>
-<span class="ansi-green-intense-fg ansi-bold">    372</span>         data <span class="ansi-blue-fg">=</span> utils<span class="ansi-blue-fg">.</span>dump_json<span class="ansi-blue-fg">(</span>params<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    373</span>         url <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;%s%s&#39;</span> <span class="ansi-blue-fg">%</span> <span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_url<span class="ansi-blue-fg">,</span> path<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 374</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_request<span class="ansi-blue-fg">(</span>command_info<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">,</span> body<span class="ansi-blue-fg">=</span>data<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    375</span> 
-<span class="ansi-green-intense-fg ansi-bold">    376</span>     <span class="ansi-green-fg">def</span> _request<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> method<span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">,</span> body<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/errorhandler.py</span> in <span class="ansi-cyan-fg">check_response</span><span class="ansi-blue-fg">(self, response)</span>
+<span class="ansi-green-intense-fg ansi-bold">    240</span>                 alert_text <span class="ansi-blue-fg">=</span> value<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;alert&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>get<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;text&#39;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    241</span>             <span class="ansi-green-fg">raise</span> exception_class<span class="ansi-blue-fg">(</span>message<span class="ansi-blue-fg">,</span> screen<span class="ansi-blue-fg">,</span> stacktrace<span class="ansi-blue-fg">,</span> alert_text<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">--&gt; 242</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">raise</span> exception_class<span class="ansi-blue-fg">(</span>message<span class="ansi-blue-fg">,</span> screen<span class="ansi-blue-fg">,</span> stacktrace<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    243</span> 
+<span class="ansi-green-intense-fg ansi-bold">    244</span>     <span class="ansi-green-fg">def</span> _value_or_default<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> obj<span class="ansi-blue-fg">,</span> key<span class="ansi-blue-fg">,</span> default<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/selenium/webdriver/remote/remote_connection.py</span> in <span class="ansi-cyan-fg">_request</span><span class="ansi-blue-fg">(self, method, url, body)</span>
-<span class="ansi-green-intense-fg ansi-bold">    395</span> 
-<span class="ansi-green-intense-fg ansi-bold">    396</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>keep_alive<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 397</span><span class="ansi-red-fg">             </span>resp <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_conn<span class="ansi-blue-fg">.</span>request<span class="ansi-blue-fg">(</span>method<span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">,</span> body<span class="ansi-blue-fg">=</span>body<span class="ansi-blue-fg">,</span> headers<span class="ansi-blue-fg">=</span>headers<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    398</span> 
-<span class="ansi-green-intense-fg ansi-bold">    399</span>             statuscode <span class="ansi-blue-fg">=</span> resp<span class="ansi-blue-fg">.</span>status
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/urllib3/request.py</span> in <span class="ansi-cyan-fg">request</span><span class="ansi-blue-fg">(self, method, url, fields, headers, **urlopen_kw)</span>
-<span class="ansi-green-intense-fg ansi-bold">     78</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     79</span>             return self.request_encode_body(
-<span class="ansi-green-fg">---&gt; 80</span><span class="ansi-red-fg">                 </span>method<span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">,</span> fields<span class="ansi-blue-fg">=</span>fields<span class="ansi-blue-fg">,</span> headers<span class="ansi-blue-fg">=</span>headers<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>urlopen_kw
-<span class="ansi-green-intense-fg ansi-bold">     81</span>             )
-<span class="ansi-green-intense-fg ansi-bold">     82</span> 
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/urllib3/request.py</span> in <span class="ansi-cyan-fg">request_encode_body</span><span class="ansi-blue-fg">(self, method, url, fields, headers, encode_multipart, multipart_boundary, **urlopen_kw)</span>
-<span class="ansi-green-intense-fg ansi-bold">    169</span>         extra_kw<span class="ansi-blue-fg">.</span>update<span class="ansi-blue-fg">(</span>urlopen_kw<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    170</span> 
-<span class="ansi-green-fg">--&gt; 171</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>urlopen<span class="ansi-blue-fg">(</span>method<span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>extra_kw<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/urllib3/poolmanager.py</span> in <span class="ansi-cyan-fg">urlopen</span><span class="ansi-blue-fg">(self, method, url, redirect, **kw)</span>
-<span class="ansi-green-intense-fg ansi-bold">    328</span>             response <span class="ansi-blue-fg">=</span> conn<span class="ansi-blue-fg">.</span>urlopen<span class="ansi-blue-fg">(</span>method<span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kw<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    329</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 330</span><span class="ansi-red-fg">             </span>response <span class="ansi-blue-fg">=</span> conn<span class="ansi-blue-fg">.</span>urlopen<span class="ansi-blue-fg">(</span>method<span class="ansi-blue-fg">,</span> u<span class="ansi-blue-fg">.</span>request_uri<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kw<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    331</span> 
-<span class="ansi-green-intense-fg ansi-bold">    332</span>         redirect_location <span class="ansi-blue-fg">=</span> redirect <span class="ansi-green-fg">and</span> response<span class="ansi-blue-fg">.</span>get_redirect_location<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/urllib3/connectionpool.py</span> in <span class="ansi-cyan-fg">urlopen</span><span class="ansi-blue-fg">(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)</span>
-<span class="ansi-green-intense-fg ansi-bold">    670</span>                 body<span class="ansi-blue-fg">=</span>body<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    671</span>                 headers<span class="ansi-blue-fg">=</span>headers<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">--&gt; 672</span><span class="ansi-red-fg">                 </span>chunked<span class="ansi-blue-fg">=</span>chunked<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    673</span>             )
-<span class="ansi-green-intense-fg ansi-bold">    674</span> 
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/urllib3/connectionpool.py</span> in <span class="ansi-cyan-fg">_make_request</span><span class="ansi-blue-fg">(self, conn, method, url, timeout, chunked, **httplib_request_kw)</span>
-<span class="ansi-green-intense-fg ansi-bold">    419</span>                     <span class="ansi-red-fg"># Python 3 (including for exceptions like SystemExit).</span>
-<span class="ansi-green-intense-fg ansi-bold">    420</span>                     <span class="ansi-red-fg"># Otherwise it looks like a bug in the code.</span>
-<span class="ansi-green-fg">--&gt; 421</span><span class="ansi-red-fg">                     </span>six<span class="ansi-blue-fg">.</span>raise_from<span class="ansi-blue-fg">(</span>e<span class="ansi-blue-fg">,</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    422</span>         <span class="ansi-green-fg">except</span> <span class="ansi-blue-fg">(</span>SocketTimeout<span class="ansi-blue-fg">,</span> BaseSSLError<span class="ansi-blue-fg">,</span> SocketError<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    423</span>             self<span class="ansi-blue-fg">.</span>_raise_timeout<span class="ansi-blue-fg">(</span>err<span class="ansi-blue-fg">=</span>e<span class="ansi-blue-fg">,</span> url<span class="ansi-blue-fg">=</span>url<span class="ansi-blue-fg">,</span> timeout_value<span class="ansi-blue-fg">=</span>read_timeout<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/urllib3/packages/six.py</span> in <span class="ansi-cyan-fg">raise_from</span><span class="ansi-blue-fg">(value, from_value)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/site-packages/urllib3/connectionpool.py</span> in <span class="ansi-cyan-fg">_make_request</span><span class="ansi-blue-fg">(self, conn, method, url, timeout, chunked, **httplib_request_kw)</span>
-<span class="ansi-green-intense-fg ansi-bold">    414</span>                 <span class="ansi-red-fg"># Python 3</span>
-<span class="ansi-green-intense-fg ansi-bold">    415</span>                 <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 416</span><span class="ansi-red-fg">                     </span>httplib_response <span class="ansi-blue-fg">=</span> conn<span class="ansi-blue-fg">.</span>getresponse<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    417</span>                 <span class="ansi-green-fg">except</span> BaseException <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    418</span>                     <span class="ansi-red-fg"># Remove the TypeError from the exception chain in</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/http/client.py</span> in <span class="ansi-cyan-fg">getresponse</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1319</span>         <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1320</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 1321</span><span class="ansi-red-fg">                 </span>response<span class="ansi-blue-fg">.</span>begin<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1322</span>             <span class="ansi-green-fg">except</span> ConnectionError<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1323</span>                 self<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/http/client.py</span> in <span class="ansi-cyan-fg">begin</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    294</span>         <span class="ansi-red-fg"># read until we get a non-100 response</span>
-<span class="ansi-green-intense-fg ansi-bold">    295</span>         <span class="ansi-green-fg">while</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 296</span><span class="ansi-red-fg">             </span>version<span class="ansi-blue-fg">,</span> status<span class="ansi-blue-fg">,</span> reason <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_read_status<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    297</span>             <span class="ansi-green-fg">if</span> status <span class="ansi-blue-fg">!=</span> CONTINUE<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    298</span>                 <span class="ansi-green-fg">break</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/http/client.py</span> in <span class="ansi-cyan-fg">_read_status</span><span class="ansi-blue-fg">(self)</span>
-<span class="ansi-green-intense-fg ansi-bold">    255</span> 
-<span class="ansi-green-intense-fg ansi-bold">    256</span>     <span class="ansi-green-fg">def</span> _read_status<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 257</span><span class="ansi-red-fg">         </span>line <span class="ansi-blue-fg">=</span> str<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>fp<span class="ansi-blue-fg">.</span>readline<span class="ansi-blue-fg">(</span>_MAXLINE <span class="ansi-blue-fg">+</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;iso-8859-1&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    258</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>line<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">&gt;</span> _MAXLINE<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    259</span>             <span class="ansi-green-fg">raise</span> LineTooLong<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;status line&#34;</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.7/socket.py</span> in <span class="ansi-cyan-fg">readinto</span><span class="ansi-blue-fg">(self, b)</span>
-<span class="ansi-green-intense-fg ansi-bold">    587</span>         <span class="ansi-green-fg">while</span> <span class="ansi-green-fg">True</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    588</span>             <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 589</span><span class="ansi-red-fg">                 </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_sock<span class="ansi-blue-fg">.</span>recv_into<span class="ansi-blue-fg">(</span>b<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    590</span>             <span class="ansi-green-fg">except</span> timeout<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    591</span>                 self<span class="ansi-blue-fg">.</span>_timeout_occurred <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+<span class="ansi-red-fg">NoSuchElementException</span>: Message: no such element: Unable to locate element: {&#34;method&#34;:&#34;xpath&#34;,&#34;selector&#34;:&#34;//*[@title=&#34;Next page of results&#34;]&#34;}
+  (Session info: headless chrome=80.0.3987.122)
+</pre>
 </div>
 </div>
 

@@ -15,6 +15,12 @@ entries:
     - output: web,pdf
       title: scholar
       url: /scholar
+    - output: web,pdf
+      title: analysis
+      url: /analysis
+    - output: web,pdf
+      title: airflow
+      url: /airflow
     output: web
     title: research_crawler
   output: web
